@@ -1,30 +1,34 @@
-import { useFonts } from "expo-font";
 import React from "react";
-import { Text } from "react-native";
-import { AppColors } from "../../colors/colors";
+import { ActivityIndicator } from "react-native";
+import { AppColors } from "../../helpers/colors";
 import { TextComponent } from "../Text/TextComponent";
 import { ButtonStyle, FlatButtonStyle } from "./ButtonStyle";
 
 interface ButtonProps {
   title: string;
   backgroundColor?: string;
+  onPress?: () => void;
+  isLoading?: boolean;
 }
 
-export const ButtonComponent = ({ title, backgroundColor }: ButtonProps) => {
-  const [loadedFont] = useFonts({
-    InterRegular: require("../../../assets/fonts/Inter-Regular.ttf"),
-  });
-
-  if (!loadedFont) return null;
-
+export const ButtonComponent = ({
+  title,
+  backgroundColor,
+  onPress,
+  isLoading,
+}: ButtonProps) => {
   return (
-    <ButtonStyle backgroundColor={backgroundColor}>
-      <TextComponent
-        title={title}
-        color={AppColors.colorWhite}
-        fontFamily="InterMedium"
-        fontSize="15"
-      />
+    <ButtonStyle backgroundColor={backgroundColor} onPress={onPress}>
+      {isLoading ? (
+        <ActivityIndicator color={AppColors.colorWhite} />
+      ) : (
+        <TextComponent
+          title={title}
+          color={AppColors.colorWhite}
+          fontMed
+          fontSize="16px"
+        />
+      )}
     </ButtonStyle>
   );
 };
@@ -32,29 +36,29 @@ export const ButtonComponent = ({ title, backgroundColor }: ButtonProps) => {
 interface FlatButtonProps {
   title1: string;
   title2: string;
+  fontSize?: string;
+  onPress?: () => void;
 }
 
-export const FlatButtonComponent = ({ title1, title2 }: FlatButtonProps) => {
-  const [loadedFont] = useFonts({
-    InterThin: require("../../../assets/fonts/Inter-Thin.ttf"),
-  });
-
-  if (!loadedFont) return null;
-
+export const FlatButtonComponent = ({
+  title1,
+  title2,
+  fontSize,
+  onPress,
+}: FlatButtonProps) => {
   return (
-    <FlatButtonStyle>
+    <FlatButtonStyle onPress={onPress}>
       <TextComponent
         title={title1}
         color={AppColors.textColor}
-        fontFamily="InterThin"
-        fontSize="15"
-        style={{ color: "red" }}
+        fontReg
+        fontSize={fontSize || "15px"}
       />
       <TextComponent
         title={title2}
         color={AppColors.colorGreen}
-        fontFamily="InterThin"
-        fontSize="15"
+        fontMed
+        fontSize="16px"
       />
     </FlatButtonStyle>
   );

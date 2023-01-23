@@ -1,28 +1,45 @@
-import React, { useEffect } from "react";
-import * as Font from "expo-font";
 import { TextStyle } from "../../styles/TextStyle";
 
 interface TextComponentProps {
   title: string;
   fontSize?: string;
   color?: string;
-  fontFamily: string;
   style?: any;
+  fontReg?: boolean;
+  fontBold?: boolean;
+  fontMed?: boolean;
+  fontLight?: boolean;
+  onPress?: () => void;
 }
 
 export const TextComponent = ({
   title,
   fontSize,
   color,
-  fontFamily,
   style,
+  fontReg,
+  fontBold,
+  fontMed,
+  fontLight,
+  onPress,
 }: TextComponentProps) => {
   return (
     <>
       <TextStyle
+        onPress={onPress}
         fontSize={fontSize}
         color={color}
-        fontFamily={fontFamily}
+        fontFamily={
+          fontReg
+            ? "InterRegular"
+            : fontBold
+            ? "InterBold"
+            : fontMed
+            ? "InterMedium"
+            : fontLight
+            ? "InterLight"
+            : "InterThin"
+        }
         style={style}
       >
         {title}

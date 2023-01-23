@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "name": "app",
+      "path": "."
+    },
+    {
+      "name": "authspace",
+      "path": "src/modules/authModule"
+    }
+  ]
+}

@@ -1,14 +1,12 @@
 import styled from "styled-components";
-import { AppColors } from "../../colors/colors";
+import { AppColors } from "../../helpers/colors";
 
 interface ButtonStyleProps {
   backgroundColor: string;
   isborderOnly: boolean;
 }
-
 export const ButtonStyle = styled.Pressable`
   background: ${AppColors.colorGreen};
-
   padding: 4%;
   width: 100%;
   align-items: center;
@@ -19,7 +17,6 @@ export const ButtonStyle = styled.Pressable`
 `;
 
 export const FlatButtonStyle = styled.Pressable`
-  padding: 4%;
   width: 100%;
   align-items: flex-end;
   justify-content: center;

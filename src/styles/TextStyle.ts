@@ -1,5 +1,5 @@
 import stylesd from "styled-components";
-import { AppColors } from "../colors/colors";
+import { AppColors } from "../helpers/colors";
 
 interface IHeaderText {
   fontSize?: number;
@@ -9,7 +9,7 @@ interface IHeaderText {
 }
 
 export const TextStyle = stylesd.Text`
-   font-size: ${(props: IHeaderText) => props.fontSize}px;
+   font-size: ${(props: IHeaderText) => props.fontSize || 12};
    color: ${(props: IHeaderText) => props.color || AppColors.textColor}
    fontFamily: ${(props: IHeaderText) => props.fontFamily || "Roboto"}
    font-weight: ${(props: IHeaderText) => props.fontWeight || "400"}

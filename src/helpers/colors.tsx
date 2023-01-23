@@ -5,4 +5,5 @@ export const AppColors = {
   placeholderColor: "#89929C",
   textColor: "#111111",
   colorWhite: "#ffffff",
+  textColorFaint: "#4B545B",
 };
