@@ -1,16 +1,49 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useCallback } from "react";
+import React, { createContext, useCallback, useMemo, useState } from "react";
 import { useFonts } from "expo-font";
-import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
+import {
+  createNavigationContainerRef,
+  NavigationContainer,
+} from "@react-navigation/native";
 import AuthNavigation from "./src/navigation/AuthNavigation";
 import { customFonts } from "./src/helpers/fonts";
 import * as SplashScreen from "expo-splash-screen";
 import { View } from "react-native";
+import TabNavigation from "./src/navigation/TabNavigator";
+import { PortalProvider } from "@gorhom/portal";
+import { deleteData, getData } from "./src/helpers/methods";
+import { store } from "./src/redux/store";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function App() {
+export const NavContext = createContext(null);
+const navigationRef = createNavigationContainerRef();
+
+const App = () => {
   const [fontsLoaded] = useFonts(customFonts);
+  const [loginState, setLoginState] = useState("");
+
+  const authContext = useMemo(
+    () => ({
+      login: async () => {
+        try {
+          const value = await getData("isLogin");
+          setLoginState(value);
+        } catch (error) {
+          alert("Something went wrong");
+        }
+      },
+      logout: async () => {
+        try {
+          await deleteData("isLogin");
+          setLoginState("");
+        } catch (error) {
+          alert("Something went wrong");
+        }
+      },
+    }),
+    []
+  );
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
@@ -24,10 +57,16 @@ export default function App() {
 
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <StatusBar style="auto" />
-      <NavigationContainer>
-        <AuthNavigation />
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavContext.Provider value={authContext}>
+          <PortalProvider>
+            <NavigationContainer ref={navigationRef}>
+              {loginState === "true" ? <TabNavigation /> : <AuthNavigation />}
+            </NavigationContainer>
+          </PortalProvider>
+        </NavContext.Provider>
+      </Provider>
     </View>
   );
-}
+};
+export default App;

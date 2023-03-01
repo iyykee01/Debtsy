@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ConfirmOTP from "../modules/authModule/ConfirmOTP/view/ConfirmOTP";
-import ForgotPassword from "../modules/authModule/ForgotPassword/view/ForgotPassword";
-import Login from "../modules/authModule/Login/view/Login";
-import Signup from "../modules/authModule/SignUp/view/Signup";
+import ConfirmOTP from "../modules/authModule/ConfirmOTP/ConfirmOTP";
+import ForgotPassword from "../modules/authModule/ForgotPassword/ForgotPassword";
+import Login from "../modules/authModule/Login/Login";
+import Signup from "../modules/authModule/SignUp/Signup";
 
 const Stack = createNativeStackNavigator();
 

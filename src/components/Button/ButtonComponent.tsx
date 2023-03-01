@@ -9,6 +9,9 @@ interface ButtonProps {
   backgroundColor?: string;
   onPress?: () => void;
   isLoading?: boolean;
+  isborderOnly?: boolean;
+  color?: string;
+  disabled?: boolean;
 }
 
 export const ButtonComponent = ({
@@ -16,15 +19,23 @@ export const ButtonComponent = ({
   backgroundColor,
   onPress,
   isLoading,
+  isborderOnly,
+  color,
+  disabled,
 }: ButtonProps) => {
   return (
-    <ButtonStyle backgroundColor={backgroundColor} onPress={onPress}>
+    <ButtonStyle
+      background={backgroundColor}
+      onPress={onPress}
+      isborderOnly={isborderOnly}
+      disabled={disabled}
+    >
       {isLoading ? (
         <ActivityIndicator color={AppColors.colorWhite} />
       ) : (
         <TextComponent
           title={title}
-          color={AppColors.colorWhite}
+          color={color || AppColors.colorWhite}
           fontMed
           fontSize="16px"
         />

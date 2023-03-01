@@ -6,14 +6,14 @@ interface ButtonStyleProps {
   isborderOnly: boolean;
 }
 export const ButtonStyle = styled.Pressable`
-  background: ${AppColors.colorGreen};
+  background: ${(props) => props.background || AppColors.colorGreen};
   padding: 4%;
   width: 100%;
   align-items: center;
   justify-content: center;
   border-radius: 4px;
   border: ${(props: ButtonStyleProps) =>
-    props.isborderOnly ? `1px solid ${AppColors.colorGreen}` : "none"};
+    props.isborderOnly ? `0.5px solid ${AppColors.colorGreen}` : "none"};
 `;
 
 export const FlatButtonStyle = styled.Pressable`

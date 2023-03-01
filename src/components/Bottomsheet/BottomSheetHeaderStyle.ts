@@ -1,14 +1,30 @@
 import styled from "styled-components";
 
-export const ButtonsheetHeaderContainerStyle = styled.View`
+export const ButtomsheetHeaderContainerStyle = styled.View`
   display: flex;
   flex-direction: row;
+  height: 50px;
 `;
 
-export const ButtonsheetHeaderContentWrapperStyle = styled.View`
+interface ContentWrapperStyleProps {
+  flex: string;
+}
+export const ButtomsheetContentWrapperStyle = styled.Pressable`
   display: flex;
-  flex: 1;
   justify-content: center;
-  align-items: center;
-  background: ${(props: { background: string }) => props.background || "green"};
+  flex: ${(props: ContentWrapperStyleProps) => props.flex || "1"};
+`;
+
+export const ButtonsheetCloseButtonContainerStyle = styled(
+  ButtomsheetContentWrapperStyle
+)`
+  align-items: flex-end;
+`;
+
+export const ButtomsheetlastContentWrapper = styled.View`
+  align-items: flex-end;
+  width: 50px;
+  hieght: 100%;
+  border-radius: 25px;
+  background-color: #000;
 `;

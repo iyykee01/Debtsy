@@ -1,10 +1,19 @@
 import styled from "styled-components";
+import { AppColors } from "../../helpers/colors";
 
-export const ProfileComponentStyle = styled.View`
+interface ProfileComponentStyleProps {
+  isIndex: boolean;
+  paddingVertical: string;
+}
+
+export const ProfileComponentStyle = styled.Pressable`
   display: flex;
   flex-direction: row;
-  border-bottom-width: 1px solid black;
-  padding: 4%;
+  border-bottom-width: 1px
+  border-color: ${(props: ProfileComponentStyleProps) =>
+    props.isIndex ? "transparent" : AppColors.lightGray}
+  padding-vertical: ${(props: ProfileComponentStyleProps) =>
+    props.paddingVertical || "4%"};
 `;
 
 interface ContentWrapperStyleProps {
@@ -13,6 +22,9 @@ interface ContentWrapperStyleProps {
 export const ContentWrapperStyle = styled.View`
   display: flex;
   justify-content: center;
-  background-color: blue;
   flex: ${(props: ContentWrapperStyleProps) => props.flex || "1"};
+`;
+
+export const RightIconWrapperStyle = styled.View`
+  align-items: flex-end;
 `;

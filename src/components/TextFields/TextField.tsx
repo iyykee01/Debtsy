@@ -9,6 +9,7 @@ import {
   TextInputWithIconWrapperStyle,
 } from "./TextFieldsStyles";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useState } from "react";
 
 interface TextFieldProps {
   fieldHeader: string;
@@ -22,6 +23,10 @@ interface TextFieldProps {
   iconName?: any;
   innerRef?: any;
   onSubmitEditing?: () => void;
+  color?: string;
+  size?: number;
+  onChangeText?: (text: string) => void;
+  value?: string;
 }
 
 export const TextField = ({
@@ -32,6 +37,8 @@ export const TextField = ({
   keyboardType,
   innerRef,
   onSubmitEditing,
+  onChangeText,
+  value,
 }: TextFieldProps) => {
   return (
     <>
@@ -49,6 +56,8 @@ export const TextField = ({
         keyboardType={keyboardType}
         ref={innerRef}
         onSubmitEditing={onSubmitEditing}
+        onChangeText={onChangeText}
+        value={value}
       />
     </>
   );
@@ -65,6 +74,10 @@ export const TextFieldWithRightIcon = ({
   iconName,
   innerRef,
   onSubmitEditing,
+  color,
+  size,
+  onChangeText,
+  value,
 }: TextFieldProps) => {
   return (
     <>
@@ -85,15 +98,16 @@ export const TextFieldWithRightIcon = ({
             secureTextEntry={isPassword ? true : false}
             ref={innerRef}
             onSubmitEditing={onSubmitEditing}
-            textContentType="oneTimeCode"
+            onChangeText={onChangeText}
+            value={value}
           />
         </TextInputContentStyle>
 
         <IconWrapperStyle>
           <Ionicons
             name={iconName}
-            size={20}
-            color={AppColors.textColor}
+            size={size || 20}
+            color={color || AppColors.textColor}
             onPress={onPress}
           />
         </IconWrapperStyle>

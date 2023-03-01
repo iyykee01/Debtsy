@@ -6,7 +6,7 @@
     },
     {
       "name": "authspace",
-      "path": "src/modules/authModule"
+      "path": "src/modules/debtModule"
     }
   ]
 }

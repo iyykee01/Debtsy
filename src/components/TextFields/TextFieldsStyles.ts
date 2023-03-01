@@ -26,7 +26,7 @@ export const TextInputWithIconWrapperStyle = styled.View`
   flex-direction: row;
   background: ${AppColors.lightGray};
   width: 100%;
-  padding: 3.5%;
+  padding: 4%;
   border-radius: 4px;
 `;
 

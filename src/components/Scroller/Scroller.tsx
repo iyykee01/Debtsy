@@ -6,7 +6,7 @@ interface ScrollerProps {
   style?: any;
 }
 
-export const Scroller = ({ children, ref, style, ...props }: ScrollerProps) => (
+export const Scroller = ({ children, ref, style }: ScrollerProps) => (
   <FlatList
     ref={ref}
     showsVerticalScrollIndicator={false}

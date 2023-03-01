@@ -10,6 +10,8 @@ interface TextComponentProps {
   fontMed?: boolean;
   fontLight?: boolean;
   onPress?: () => void;
+  textAlign?: string;
+  underline?: string;
 }
 
 export const TextComponent = ({
@@ -22,11 +24,15 @@ export const TextComponent = ({
   fontMed,
   fontLight,
   onPress,
+  textAlign,
+  underline,
 }: TextComponentProps) => {
   return (
     <>
       <TextStyle
+        underline={underline}
         onPress={onPress}
+        textAlign={textAlign}
         fontSize={fontSize}
         color={color}
         fontFamily={

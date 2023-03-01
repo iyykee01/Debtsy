@@ -1,25 +1,106 @@
-import React from "react";
-
-import { TextComponent } from "../Text/TextComponent";
 import {
-  ButtonsheetHeaderContainerStyle,
-  ButtonsheetHeaderContentWrapperStyle,
-} from "./BottomSheetHeaderStyle";
+  ButtomsheetHeaderContainerStyle,
+  ButtomsheetContentWrapperStyle,
+  ButtonsheetCloseButtonContainerStyle,
+} from "./BottomsheetHeaderStyle";
+import { Ionicons } from "@expo/vector-icons";
+import { AppColors } from "../../helpers/colors";
+import { TextComponent } from "../Text/TextComponent";
 
-export const BottomsheetHeader = () => {
+import { Image } from "react-native";
+
+interface BottomSheetHeaderProps {
+  title: string;
+  closePressed?: () => void;
+  isLegal?: boolean;
+}
+
+const BottomSheetHeader = ({
+  title,
+  closePressed,
+  isLegal,
+}: BottomSheetHeaderProps) => {
   return (
-    <ButtonsheetHeaderContainerStyle>
-      <ButtonsheetHeaderContentWrapperStyle background="blue">
-        <TextComponent title="P" fontSize="20" />
-      </ButtonsheetHeaderContentWrapperStyle>
+    <ButtomsheetHeaderContainerStyle>
+      <ButtomsheetContentWrapperStyle>
+        {isLegal && (
+          <Ionicons
+            name="chevron-back-outline"
+            size={20}
+            onPress={closePressed}
+            color={AppColors.textColor}
+            style={{
+              alignSelf: "flex-start",
+              marginLeft: -5,
+            }}
+          />
+        )}
+      </ButtomsheetContentWrapperStyle>
 
-      <ButtonsheetHeaderContentWrapperStyle>
-        <TextComponent title="Profile" fontSize="20" />
-      </ButtonsheetHeaderContentWrapperStyle>
+      <>
+        <ButtomsheetContentWrapperStyle flex={3}>
+          <TextComponent
+            title={title}
+            fontMed
+            fontSize="20px"
+            textAlign="center"
+          />
+        </ButtomsheetContentWrapperStyle>
 
-      <ButtonsheetHeaderContentWrapperStyle background="red">
-        <TextComponent title="P" fontSize="20" />
-      </ButtonsheetHeaderContentWrapperStyle>
-    </ButtonsheetHeaderContainerStyle>
+        <ButtonsheetCloseButtonContainerStyle onPress={closePressed}>
+          {!isLegal && (
+            <Image source={require("../../../assets/images/cancel.png")} />
+          )}
+        </ButtonsheetCloseButtonContainerStyle>
+      </>
+    </ButtomsheetHeaderContainerStyle>
   );
 };
+
+interface BottomSheetHeaderProps {
+  title: string;
+  closePressed?: () => void;
+  isLegal?: boolean;
+}
+
+const BottomSheetHeader2 = ({
+  title,
+  closePressed,
+  isLegal,
+}: BottomSheetHeaderProps) => {
+  return (
+    <ButtomsheetHeaderContainerStyle>
+      {isLegal ? (
+        <ButtomsheetContentWrapperStyle>
+          <Ionicons
+            name="chevron-back-outline"
+            size={20}
+            onPress={closePressed}
+            color={AppColors.textColor}
+            style={{
+              alignSelf: "flex-start",
+              marginLeft: -5,
+            }}
+          />
+        </ButtomsheetContentWrapperStyle>
+      ) : (
+        <>
+          <ButtomsheetContentWrapperStyle flex={3}>
+            <TextComponent
+              title={title}
+              fontMed
+              fontSize="20px"
+              textAlign="center"
+            />
+          </ButtomsheetContentWrapperStyle>
+
+          <ButtonsheetCloseButtonContainerStyle onPress={closePressed}>
+            <Image source={require("../../../assets/images/cancel.png")} />
+          </ButtonsheetCloseButtonContainerStyle>
+        </>
+      )}
+    </ButtomsheetHeaderContainerStyle>
+  );
+};
+
+export default BottomSheetHeader;

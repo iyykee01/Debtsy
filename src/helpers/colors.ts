@@ -1,0 +1,17 @@
+export const AppColors = {
+  backgroundColor: "#EDEDED",
+  lightGray: "#f8f9f9",
+  colorGreen: "#51B26B",
+  placeholderColor: "#89929C",
+  textColor: "#111111",
+  colorWhite: "#ffffff",
+  textColorFaint: "#4B545B",
+  borderColr: "#e9ebed",
+  debtTextColor: "#787E95",
+  borderColor: "#E9E9EC",
+  colorFadedGreen: "#FCB89210",
+  colorFadedBlue: "#683E7B10",
+  pieColorTotal: "#D8BF67",
+  pieColorUnPaid: "#FCB287",
+  pieColorPaid: "#945BDE",
+};

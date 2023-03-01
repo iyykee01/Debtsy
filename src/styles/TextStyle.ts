@@ -13,4 +13,7 @@ export const TextStyle = stylesd.Text`
    color: ${(props: IHeaderText) => props.color || AppColors.textColor}
    fontFamily: ${(props: IHeaderText) => props.fontFamily || "Roboto"}
    font-weight: ${(props: IHeaderText) => props.fontWeight || "400"}
+   text-align: ${(props) => props.textAlign || "left"};
+   text-decorationLine: ${(props) => props.underline || "none"};
+  
 `;
