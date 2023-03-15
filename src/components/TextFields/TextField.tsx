@@ -27,6 +27,7 @@ interface TextFieldProps {
   size?: number;
   onChangeText?: (text: string) => void;
   value?: string;
+  isEditable?: boolean;
 }
 
 export const TextField = ({
@@ -39,6 +40,7 @@ export const TextField = ({
   onSubmitEditing,
   onChangeText,
   value,
+  isEditable,
 }: TextFieldProps) => {
   return (
     <>
@@ -50,6 +52,11 @@ export const TextField = ({
       ) : null}
 
       <TextInputStyle
+        style={
+          isEditable
+            ? { backgroundColor: AppColors.backgroundColor }
+            : { backgroundColor: AppColors.lightGray }
+        }
         autoFocus={autoFocus}
         placeholder={placeholder}
         placeholderTextColor={AppColors.placeholderColor}
@@ -58,6 +65,7 @@ export const TextField = ({
         onSubmitEditing={onSubmitEditing}
         onChangeText={onChangeText}
         value={value}
+        editable={!isEditable}
       />
     </>
   );

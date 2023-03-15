@@ -9,32 +9,41 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 interface DebtCardComponentProps {
   onPress?: () => void;
+  item: any;
 }
 
-export const DebtCardComponent = ({ onPress }: DebtCardComponentProps) => {
+export const DebtCardComponent = ({
+  onPress,
+  item,
+}: DebtCardComponentProps) => {
   return (
     <>
       <DebtCardContainer onPress={onPress}>
         <Spacer spaceTop="-1%" />
         <ProfileComponent
           imgSrc={require("../../../../assets/images/menu-scale.png")}
-          title="Student Loan"
+          title={item?.name}
           isIndex
-          onPress={() => {}}
           style={{ width: 20, height: 20 }}
         />
         <Spacer spaceTop="-1%" />
-        <TextComponent title="$8,090.00" fontBold fontSize="16px" />
+        <TextComponent
+          title={`$${
+            parseInt(item?.paidAmount) + parseInt(item?.unpaidAmount)
+          }`}
+          fontBold
+          fontSize="16px"
+        />
         <Spacer spaceTop="1.8%" />
         <TextComponent
-          title="Paid - $4,000"
+          title={`Paid - $${item?.paidAmount || 0}`}
           fontLight
           fontSize="14px"
           color={AppColors.placeholderColor}
         />
         <Spacer spaceTop="1.8%" />
         <TextComponent
-          title="Unpaid - $4,090"
+          title={`Unpaid - $${item?.unpaidAmount - item?.paidAmount}`}
           fontLight
           fontSize="14px"
           color={AppColors.placeholderColor}

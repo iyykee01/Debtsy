@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Alert, Platform } from "react-native";
+import { Platform } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { NavContext } from "../../../../App";
 import {
@@ -13,7 +13,8 @@ import {
   TextFieldWithRightIcon,
 } from "../../../components/TextFields/TextField";
 import { AppColors } from "../../../helpers/colors";
-import { registerUser } from "../../../redux/features/authFeature/authFeautures";
+import { getData } from "../../../helpers/methods";
+import { registerUser } from "../../../redux/features/authFeature/authFeature";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
 import { Container, ContentWrapper } from "../../../styles/Container";
 import { Spacer } from "../../../styles/Spacing";
@@ -43,24 +44,18 @@ const Signup = ({ navigation }) => {
 
   const createAccountHandler = async () => {
     //Call api to create account and store token in async storage
-
     const firstname = name.split(" ")[0];
     const lastname = name.split(" ")[1] || "";
 
-    try {
-      await dispatch(
-        registerUser({
-          firstname,
-          lastname,
-          email,
-          password,
-          passwordConfirm,
-        })
-      );
-      login();
-    } catch (error) {
-      Alert.alert("Opps!", erorr);
-    }
+    await dispatch(
+      registerUser({
+        firstname,
+        lastname,
+        email,
+        password,
+        passwordConfirm,
+      })
+    );
   };
 
   useEffect(() => {
@@ -153,7 +148,6 @@ const Signup = ({ navigation }) => {
               backgroundColor={
                 disabled ? AppColors.placeholderColor : AppColors.colorGreen
               }
-              isLoading={loading}
             />
           </KeyboardAwareScrollView>
 

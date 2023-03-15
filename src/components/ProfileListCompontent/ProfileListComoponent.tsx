@@ -1,3 +1,4 @@
+import { Text } from "react-native";
 import { AppColors } from "../../helpers/colors";
 import {
   ContentWrapperStyle,
@@ -6,24 +7,25 @@ import {
 import { TextComponent } from "../Text/TextComponent";
 
 interface ListProps {
-  item: any;
-  index: number;
+  title: string;
+  value: string;
+  isindex?: boolean;
 }
 
-export const ProfileListComoponent = ({ item, index }: ListProps) => {
+export const ProfileListComoponent = ({ title, value, isindex }: ListProps) => {
   return (
     <ProfileComponentStyle
       paddingVertical="7%"
       style={{ paddingHorizontal: 6 }}
-      isIndex={index === 4}
+      isIndex={isindex}
     >
       <ContentWrapperStyle flex={1}>
-        <TextComponent title={item?.title} fontSize="14px" fontReg />
+        <TextComponent title={title} fontSize="14px" fontReg />
       </ContentWrapperStyle>
 
       <ContentWrapperStyle flex={2}>
         <TextComponent
-          title={item?.value}
+          title={value}
           fontSize="14px"
           fontReg
           color={AppColors.textColorFaint}

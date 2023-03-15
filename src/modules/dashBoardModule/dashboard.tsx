@@ -228,6 +228,7 @@ const DashboardScreen = () => {
                 <DebtHistorySection onPress={() => openTxnDebtButtonsheet(1)} />
               )}
             />
+            {/* <Spacer spaceBottom="5%" /> */}
           </Scroller>
 
           <PlusImageWrapperStyle onPress={() => openCreateDebtButtonsheet(1)}>

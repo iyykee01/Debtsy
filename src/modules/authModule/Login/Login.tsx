@@ -13,23 +13,19 @@ import {
   TextFieldWithRightIcon,
 } from "../../../components/TextFields/TextField";
 import { AppColors } from "../../../helpers/colors";
-import { storeData } from "../../../helpers/methods";
 import { Container, ContentWrapper } from "../../../styles/Container";
 import { Spacer } from "../../../styles/Spacing";
 import { ButtonWrapper, ForgotPasswordStyle } from "./LoginStyle";
-import { loginUser } from "../../../redux/features/authFeature/authFeautures";
-// import { setLoading } from "../../../redux/features/loadingFeature/loadingFeature";
+import { loginUser } from "../../../redux/features/authFeature/authFeature";
 
 const Login = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector((state) => state.loading.loading);
-  const user = useAppSelector((state) => state.user.user);
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const [email, setEmail] = useState("Testing@gmail.com");
+  const [email, setEmail] = useState("Yustimisu@gmail.com");
   const [password, setPassword] = useState("Testing1234");
-  const [visible, setVisible] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [disabled, setDisabled] = useState(false);
   const { login } = useContext(NavContext);
@@ -42,11 +38,9 @@ const Login = ({ navigation }) => {
     navigation.navigate("ForgotPassword");
   };
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     //Call api to log user in and store token in async storage
-    // login();
-
-    dispatch(loginUser({ email, password }));
+    dispatch(loginUser({ email, password, login }));
   };
 
   useEffect(() => {
@@ -56,10 +50,6 @@ const Login = ({ navigation }) => {
       setDisabled(true);
     }
   }, [emailRef, password]);
-
-  useEffect(() => {
-    console.log(user, "...is user");
-  }, [user]);
 
   return (
     <>
@@ -76,7 +66,7 @@ const Login = ({ navigation }) => {
             hasHeader
             innerRef={emailRef}
             onSubmitEditing={() => passwordRef.current.focus()}
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => setEmail(text.toLowerCase())}
           />
 
           <Spacer spaceTop="6%" />

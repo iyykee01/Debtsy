@@ -1,12 +1,13 @@
-import React from "react";
-import { FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import React, { useEffect } from "react";
+
 import BottomSheetHeader from "../../../../components/Bottomsheet/BottomSheetHeader";
 import { ButtonComponent } from "../../../../components/Button/ButtonComponent";
 
 import { ProfileListComoponent } from "../../../../components/ProfileListCompontent/ProfileListComoponent";
 import { Scroller } from "../../../../components/Scroller/Scroller";
-import { TextComponent } from "../../../../components/Text/TextComponent";
 import { AppColors } from "../../../../helpers/colors";
+import { useAppSelector } from "../../../../redux/hook";
 import { ContentWrapper } from "../../../../styles/Container";
 import { Spacer } from "../../../../styles/Spacing";
 import {
@@ -15,35 +16,16 @@ import {
   ProfileImageWrapper,
 } from "./bottomsheetProfileStyle";
 
-const data = [
-  {
-    title: "Full name",
-    value: "Stella Jameson",
-  },
-  {
-    title: "Email",
-    value: "Stellajameson@gmail.com",
-  },
-  {
-    title: "Phone number",
-    value: "+1 (416) 123-456",
-  },
-  {
-    title: "Password",
-    value: "@@@@@@@@@@",
-  },
-  {
-    title: "Country",
-    value: "Canada",
-  },
-];
-
 interface BottomsheetProfileProps {
   closePressed: () => void;
+  closeNavigate?: () => void;
 }
 export const BottomsheetProfile = ({
   closePressed,
+  closeNavigate,
 }: BottomsheetProfileProps) => {
+  const user = useAppSelector((state) => state.user.user);
+
   return (
     <ContentWrapper>
       <BottomSheetHeader title="Profile" closePressed={closePressed} />
@@ -61,12 +43,20 @@ export const BottomsheetProfile = ({
 
         <Spacer spaceTop="7%" />
 
-        <FlatList
-          scrollEnabled={false}
-          data={data}
-          renderItem={({ item, index }) => (
-            <ProfileListComoponent item={item} key={index} index={index} />
-          )}
+        <ProfileListComoponent
+          title="Full Name"
+          value={`${user?.firstname} ${user?.lastname}`}
+        />
+        <ProfileListComoponent title="Email" value={user?.email} />
+        <ProfileListComoponent title="User Name" value={user?.username} />
+        <ProfileListComoponent
+          title="Phone number"
+          value={user?.phonenumber || "Nil"}
+        />
+        <ProfileListComoponent
+          title="Country"
+          value={user?.country || "Nil"}
+          isindex
         />
 
         <Spacer spaceTop="10%" />
@@ -76,6 +66,7 @@ export const BottomsheetProfile = ({
           isborderOnly
           backgroundColor="transparent"
           color={AppColors.textColor}
+          onPress={closeNavigate}
         />
 
         <Spacer spaceTop="3%" />

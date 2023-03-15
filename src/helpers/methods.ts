@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 export const storeData = async (keyName: string, value: string) => {
   try {
@@ -25,5 +26,25 @@ export const deleteData = async (keyName: string) => {
   } catch {
     // error reading value
     throw `${keyName}:  could not be cleared..`;
+  }
+};
+
+// this method will check if token exists in storage
+export const checkToken = async () => {
+  try {
+    const token = await getData("token");
+    if (token) return true;
+    return false;
+  } catch (error) {
+    Alert.alert("Error", error);
+  }
+};
+
+//this method will delete token from storage
+export const removeToken = async () => {
+  try {
+    await deleteData("token");
+  } catch (error) {
+    Alert.alert("Error", error);
   }
 };

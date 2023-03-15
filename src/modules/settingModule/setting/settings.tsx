@@ -9,17 +9,20 @@ import { BottomsheetHelp } from "../bottomsheetViews/Help/bottomsheetHelp";
 import { BottomsheetProfile } from "../bottomsheetViews/Profile/bottomsheetProfile";
 
 const SettingsScreen = ({ navigation }) => {
-  // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
-
   const [BottomsheetComponent, setBottomsheetComponent] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-
   const [index, setIndex] = useState(-1);
 
   const bottomsheetProfileHandler = (index: number) => {
     setBottomsheetComponent(
-      <BottomsheetProfile closePressed={() => closeBottomSheet()} />
+      <BottomsheetProfile
+        closePressed={() => closeBottomSheet()}
+        closeNavigate={() => {
+          navigation.navigate("editProfile");
+          closeBottomSheet();
+        }}
+      />
     );
     setIndex(index);
     setIsOpen(true);
